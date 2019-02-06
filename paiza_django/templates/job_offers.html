@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% load static %}
+      <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+      <div class="page-header">
+          <div class="alert alert-info" role="alert">
+              勤務地キーワード:{{ key_word}}
+          </div>
+      </div>
+      {% for list in lists %}
+        <div class="jumbotron">
+              <div class="page-header ">
+                  <div  class="label label-primary">
+                           {{ list.job }}
+                  </div>
+              </div>
+              <div class="c-job_offer-box__body">
+                  <div class="c-job_offer-recruiter">
+                      <img class="c-job_offer-recruiter__thumbnail" src="{{ list.img }}" alt="Dsc02451">
+                      <h4 class="c-job_offer-recruiter__name">
+                          {{ list.company }}
+                      </h4>
+                      <div class="c-job_offer-recruiter__targets">
+
+                      </div>
+                      <div class="c-job_offer-recruiter__recruiter_bookmark">
+
+                      </div>
+                  </div>
+                  <div class="c-job_offer-condition">
+                      <dl class="c-job_offer-summary">
+                          <dt>職務内容</dt>
+                          <dd>
+                              {{ list.content }}
+                          </dd>
+                      </dl>
+                      <table class="table table-condensed">
+                          <tbody><tr>
+                              <th>
+                                  <div class="c-job_offer-detail__term">
+                                      <i class="glyphicon glyphicon-yen"></i>
+                                      給与
+                                  </div>
+                              </th>
+                              <td class="c-job_offer-detail__description">
+                                  <strong class="c-job_offer-detail__salary">{{ list.money }}</strong>
+                              </td>
+                          </tr>
+                          <tr>
+                              <th>
+                                  <div class="c-job_offer-detail__term">
+                                      <i class="glyphicon glyphicon-map-marker"></i>
+                                      勤務地
+                                  </div>
+                              </th>
+                              <td class="c-job_offer-detail__description">{{ list.office }}-20-2</td>
+                          </tr>
+                          <tr>
+                              <th>
+                                  <div class="c-job_offer-detail__term">
+                                      <i class="glyphicon glyphicon-cog"></i>
+                                      必須要件
+                                  </div>
+                              </th>
+                              <td class="c-job_offer-detail__description">
+                                  <div class="c-job_offer-detail__necessary">
+                                      {{ list.xlist }}
+                                  </div>
+                              </td>
+                          </tr>
+                          </tbody></table>
+                  </div>
+              </div>
+        <a href="{% url 'reviews' key_word=list.company %}"><img src="{% static 'kutikomi.jpg' %}" width="300" height="75" class="img-rounded" alt="Generic placeholder thumbnail"></a>
+       </div>
+
+      {% endfor %}
+      </div>
+{% endblock %}

@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% load static %}
+      <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          <div class="jumbotron">
+              <div class="page-header">
+                  <h3><span class="glyphicon glyphicon-user"></span>現在の求人情報</h3>
+              </div>
+              <p>合計:{{ count |add:"求人" }}</p>
+              <p>時刻:{{ nowtime |date:"Y/m/d H:i" }}</p>
+               <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">バージョン情報</button>
+              <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+                  <div class="modal-dialog modal-lg" role="document">
+                      <div class="modal-content">
+                          <div class="modal-header">
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                              <h4 class="modal-title" id="gridSystemModalLabel">バージョン情報</h4>
+                          </div>
+                          <div class="modal-body">
+                              <div class="row">
+                                  <div class="col-md-4 ">
+                                      <div class="alert alert-success" role="alert">Python 3.7.1</div>
+                                  </div>
+                                  <div class="col-md-4 ">
+                                       <div class="alert alert-success" role="alert">Django 2.1.5</div>
+                                  </div>
+                                  <div class="col-md-4 ">
+                                       <div class="alert alert-success" role="alert">Bootstrap v3.3.7</div>
+                                  </div>
+                              </div>
+                              <h4 class="modal-title" id="gridSystemModalLabel">情報源</h4>
+                              <div class="row">
+                                  <div class="col-md-4 ">
+                                      <div class="alert alert-info" role="alert">Paiza</div>
+                                  </div>
+                                  <div class="col-md-4 ">
+                                      <div class="alert alert-info" role="alert">カイシャの評判</div>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="modal-footer">
+                              <button type="button" class="btn btn-default" data-dismiss="modal">閉じる</button>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      <div class="row placeholders">
+            <div class="col-xs-6 col-sm-3 placeholder">
+              <img src="{% static 'python.png' %}" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+              <h4>python求人数</h4>
+              <span class="text-muted">{{ count_python }}</span>
+            </div>
+            <div class="col-xs-6 col-sm-3 placeholder">
+              <img src="{% static 'php.png' %}" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+              <h4>PHP求人数</h4>
+              <span class="text-muted">{{ count_php }}</span>
+            </div>
+            <div class="col-xs-6 col-sm-3 placeholder">
+              <img src="{% static 'ruby.png' %}" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+              <h4>Ruby求人数</h4>
+              <span class="text-muted">{{ count_ruby }}</span>
+            </div>
+            <div class="col-xs-6 col-sm-3 placeholder">
+              <img src="{% static 'go.png' %}" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
+              <h4>Go言語求人数</h4>
+              <span class="text-muted">{{ count_go }}</span>
+            </div>
+       </div>
+      <div class="bs-docs-header" id="content" tabindex="-1">
+
+    </div>
+      </div>
+
+{% endblock %}
+

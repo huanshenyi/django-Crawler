@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+      <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          <div class="page-header">
+                <!--会社名など-->
+               <div  class="alert alert-info" role="alert">
+               {{ key_word }} 口コミ件数:{{ lists|length }} 件
+               </div>
+              </div>
+           {% if lists|length == 0 %}
+              登録情報ありますが
+              データありません
+           {% endif %}
+
+          {% for list in lists %}
+
+              {% if list.sex == '男性' %}
+                 <div class="jumbotron" style="background-color:lightskyblue">
+              {% elif list.sex == '女性' %}
+                  <div class="jumbotron" style="background-color:pink">
+              {% endif %}
+               <!--口コミ-->
+               <div class="row">
+                   <div class="col-md-3 ">
+                        {% if list.sex == '男性' %}
+                     <img src="{% static 'icon-woman .png ' %}" width="200" height="200" class="img-rounded" alt="Generic placeholder thumbnail">
+                        {% elif list.sex == '女性' %}
+                        <img src="{% static 'icon-man.png' %}" width="200" height="200" class="img-rounded" alt="Generic placeholder thumbnail">
+                       {% endif %}
+                       <button type="button" class="btn btn-default btn-lg">
+                        <span class="glyphicon glyphicon-star" aria-hidden="true"></span> {{ list.year}}の口コミ
+                       </button>
+                   </div>
+                   <div class="col-md-9" style="background-color: white">
+                       <table class="table table-condensed">
+                           <tbody>
+                           <tr>
+                               <td>
+                                   {{ list.comment }}
+                                   <h1></h1>
+                                   <h1></h1>
+                               </td>
+                           </tr>
+                           <tr>
+                               <td>
+                                   {{ list.status }}
+                                    <h1></h1>
+                                    <h1></h1>
+                               </td>
+                           </tr>
+                           </tbody>
+                       </table>
+                   </div>
+               </div>
+           </div>
+      {% endfor %}
+      </div>
+{% endblock %}
