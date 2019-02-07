@@ -191,7 +191,7 @@ def reviews(request,key_word):
     comments = list(map(lambda x: re.sub('\s*','',x),comments))
     comments = list(map(lambda x: re.sub('\d+代/.+?なった！\d','',x),comments))
     comments = list(map(lambda x: re.sub('転職・就職・採用の口コミ情報','',x),comments))
-    print(comments)
+    # print(comments)
     """年数"""
     years = html_main.xpath("//div[@class='year']/text()")
     """性別"""
@@ -199,6 +199,47 @@ def reviews(request,key_word):
 
     """twitterの情報"""
     # twitters= twitter(key_word)
+    """会社の詳細情報"""
+    url_md_base="https://careerconnection.jp/review/search.html?corpName={}&reportkind=1".format(key_word)
+    respons_md_base = rt.get(url_md_base)
+    text_md_base = respons_md_base.text
+    html_md_base = etree.HTML(text_md_base)
+    try:
+      url_md = html_md_base.xpath("//ul[@class='result_y']/li/a/@href")[0]
+    except BaseException:
+       return HttpResponse(
+           "<img src='/static/404.jpg'>"
+       )
+    list_md=[]
+    response_md = rt.get(url_md)
+    text_md = response_md.text
+    html_md = etree.HTML(text_md)
+    try:
+        """売上高"""
+        price_heigh = html_md.xpath("//dl[@class='company-performance-area__list']/dd/text()")[0]
+        """営業利益"""
+        price_sales = html_md.xpath("//dl[@class='company-performance-area__list']/dd/text()")[1]
+        """経常利益"""
+        price_keijyo = html_md.xpath("//dl[@class='company-performance-area__list']/dd/text()")[2]
+        """平均年収"""
+        man_price = html_md.xpath("//dd[@class='value-main']/text()")[0]
+        """従業員数"""
+        man_int = html_md.xpath("//dl[@class='company-performance-area__list']/dd/text()")[4]
+        """平均年齢"""
+        man_age = html_md.xpath("//dl[@class='company-performance-area__list']/dd/text()")[5]
+        """月残業時間"""
+        overtime = html_md.xpath("//dl[@class='overview-area__time-list overview-area__time-list1']/dd/strong/text()")[0]
+        """月休日出勤"""
+        overday = html_md.xpath("//dl[@class='overview-area__time-list overview-area__time-list2']/dd/strong/text()")[0]
+        """有給消化率"""
+        holiday = html_md.xpath("//dl[@class='overview-area__time-list overview-area__time-list3']/dd/strong/text()")[0]
+        # list_md.append(
+        #     {'price_heigh':price_heigh,'price_sales':price_sales, 'price_keijyo': price_keijyo, 'man_price': man_price, 'man_int': man_int,'man_age':man_age,'overtime':overtime,'overday':overday,'holiday':holiday}
+        # )
+        list_md = [price_heigh,price_sales,price_keijyo,man_price,man_int,man_age,overtime,overday,holiday]
+    except BaseException:
+        list_md = []
+
 
     for status, comment, year, sex in zip(statuss,comments,years,sexs):
 
@@ -206,7 +247,7 @@ def reviews(request,key_word):
             {'status': status, 'comment': comment, 'year': year, 'sex': sex}
         )
 
-    return render(request,'reviews.html',context={'lists':lists,'key_word':key_word})
+    return render(request, 'reviews.html', context={'lists': lists, 'key_word': key_word, 'list_md': list_md})
 
 def twitter(key_word):
     pass
@@ -239,3 +280,4 @@ def job_offers(request,key_word):
              'money': money, 'img': img}
         )
     return render(request, 'job_offers.html', context={'lists': lists, 'key_word': key_word})
+
