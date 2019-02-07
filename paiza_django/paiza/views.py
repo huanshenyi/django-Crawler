@@ -175,7 +175,7 @@ def reviews(request,key_word):
     except BaseException:
        return HttpResponse(
 
-           "<img src='/static/404.jpg'>"
+           "<body background='/static/404.jpg' style=background-repeat:no-repeat;background-size:100% 100%;background-attachment:fixed;' >"
        )
     main_url = 'https://en-hyouban.com'+main_url_pazu+'kuchikomi/'
     """詳細ページを取得"""
@@ -208,7 +208,7 @@ def reviews(request,key_word):
       url_md = html_md_base.xpath("//ul[@class='result_y']/li/a/@href")[0]
     except BaseException:
        return HttpResponse(
-           "<img src='/static/404.jpg'>"
+            "<body background='/static/404.jpg' style=background-repeat:no-repeat;background-size:100% 100%;background-attachment:fixed;' >"
        )
     list_md=[]
     response_md = rt.get(url_md)
