@@ -4,9 +4,74 @@
       <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
           <div class="page-header">
                 <!--会社名など-->
-               <div  class="alert alert-info" role="alert">
-               {{ key_word }} 口コミ件数:{{ lists|length }} 件
+               <div  class="alert alert-success" role="alert">
+               会社名:{{ key_word }}
                </div>
+              <div class="row">
+                  <div class="col-xs-6 col-sm-3">
+                      <table class="table table-striped">
+                          <tbody>
+                          <tr>
+                              <td><span class="glyphicon glyphicon-usd"></span>平均年収</td>
+                              <td style="color: #428bca"><h3>{{ list_md.3 }}万円</h3></td>
+                          </tr>
+                          </tbody>
+                      </table>
+                  </div>
+                   <div class="col-xs-6 col-sm-3">
+                      <table class="table table-striped">
+                          <tbody>
+                          <tr>
+                              <td><span class="glyphicon glyphicon-time"></span>月残業時間</td>
+                              <td style="color: #428bca"><h3>{{ list_md.6 }}時間</h3></td>
+                          </tr>
+                          </tbody>
+                      </table>
+                  </div>
+                   <div class="col-xs-6 col-sm-3">
+                      <table class="table table-striped">
+                          <tbody>
+                          <tr>
+                              <td><span class="glyphicon glyphicon-time"></span>月休日出勤日</td>
+                              <td style="color: #428bca"><h3>{{ list_md.7 }}日</h3></td>
+                          </tr>
+                          </tbody>
+                      </table>
+                  </div>
+                   <div class="col-xs-6 col-sm-3">
+                      <table class="table table-striped">
+                          <tbody>
+                          <tr>
+                              <td><span class="glyphicon glyphicon-time"></span>有給消化率</td>
+                              <td style="color: #428bca"><h3>{{ list_md.8 }}％</h3></td>
+                          </tr>
+                          </tbody>
+                      </table>
+                  </div>
+              </div>
+              <table class="table">
+                  <thead>
+                  <tr>
+                      <th>売上高</th>
+                      <th>営業利益</th>
+                      <th>経常利益</th>
+                      <th>平均年収</th>
+                      <th>従業員数</th>
+                      <th>平均年齢</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr>
+                      <td>{{ list_md.0 }}</td>
+                      <td>{{ list_md.1 }}</td>
+                      <td>{{ list_md.2 }}</td>
+                      <td>{{ list_md.3 }}万円</td>
+                      <td>{{ list_md.4 }}</td>
+                      <td>{{ list_md.5 }}</td>
+                  </tr>
+                  </tbody>
+              </table>
+              <div class="alert alert-info" role="alert">口コミ件数:{{ lists|length }} 件</div>
               </div>
            {% if lists|length == 0 %}
               登録情報ありますが
